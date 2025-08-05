@@ -85,7 +85,7 @@ export function SignInForm() {
               />
             </CardContent>
             <CardFooter>
-              <Button>Entrar</Button>
+              <Button className="cursor-pointer">Entrar</Button>
             </CardFooter>
           </form>
         </Form>
