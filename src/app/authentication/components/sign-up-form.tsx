@@ -63,7 +63,7 @@ export function SignUpForm() {
   async function onSubmit(values: formValues) {
     const { name, email, password } = values;
 
-    const { data, error } = await authClient.signUp.email({
+    await authClient.signUp.email({
       name,
       email,
       password,
