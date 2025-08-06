@@ -17,6 +17,7 @@ import {
   SheetTrigger,
 } from "../ui/sheet";
 import { CartItem } from "./cart-item";
+import { CartSkeleton } from "./cart-skeleton";
 
 export function Cart() {
   const { data: cart, isPending: isCartPending } = useQuery({
@@ -45,23 +46,29 @@ export function Cart() {
 
         <div className="flex h-full flex-col px-5 pb-5">
           <div className="flex h-full max-h-full flex-col overflow-hidden">
-            <ScrollArea className="h-full">
-              <div className="flex h-full flex-col gap-8">
-                {cart?.items.map((item, i) => (
-                  <CartItem
-                    key={item.id}
-                    id={item.id}
-                    productName={item.productVariant.product.name}
-                    productVariantName={item.productVariant.name}
-                    productVariantImageUrl={item.productVariant.imageUrl}
-                    productVariantTotalPriceInCents={
-                      item.productVariant.priceInCents * item.quantity
-                    }
-                    quantity={item.quantity}
-                  />
-                ))}
-              </div>
-            </ScrollArea>
+            {!isCartPending ? (
+              <ScrollArea className="h-full">
+                <CartSkeleton />
+              </ScrollArea>
+            ) : (
+              <ScrollArea className="h-full">
+                <div className="flex h-full flex-col gap-8">
+                  {cart?.items.map((item) => (
+                    <CartItem
+                      key={item.id}
+                      id={item.id}
+                      productName={item.productVariant.product.name}
+                      productVariantName={item.productVariant.name}
+                      productVariantImageUrl={item.productVariant.imageUrl}
+                      productVariantTotalPriceInCents={
+                        item.productVariant.priceInCents * item.quantity
+                      }
+                      quantity={item.quantity}
+                    />
+                  ))}
+                </div>
+              </ScrollArea>
+            )}
           </div>
 
           {cart && cart?.items.length > 0 && (
