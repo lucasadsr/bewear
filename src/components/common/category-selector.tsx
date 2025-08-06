@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { categoryTable } from "@/db/schema";
 
 import { Button } from "../ui/button";
@@ -16,7 +18,7 @@ export function CategorySelector({ categories }: CategorySelectorProps) {
             key={category.id}
             className="cursor-pointer rounded-full bg-white"
           >
-            <span>{category.name}</span>
+            <Link href={`/category/${category.slug}`}>{category.name}</Link>
           </Button>
         ))}
       </div>
