@@ -9,7 +9,8 @@ import { db } from "@/db";
 import { productTable } from "@/db/schema";
 import { formatCentsToBRL } from "@/helpers/money";
 
-import { VariantSelector } from "./components/variant-selector";
+import ProductActions from "./components/product-actions";
+import VariantSelector from "./components/variant-selector";
 
 interface ProductVariantPageProps {
   params: Promise<{
@@ -77,7 +78,7 @@ export default async function ProductVariantPage({
           </h3>
         </div>
 
-        {/* <ProductActions productVariantId={productVariant.id} /> */}
+        <ProductActions productVariantId={productVariant.id} />
 
         <div className="px-5">
           <p className="text-shadow-amber-600">

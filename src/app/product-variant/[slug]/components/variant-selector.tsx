@@ -4,14 +4,14 @@ import Link from "next/link";
 import { productVariantTable } from "@/db/schema";
 
 interface VariantSelectorProps {
-  variants: (typeof productVariantTable.$inferSelect)[];
   selectedVariantSlug: string;
+  variants: (typeof productVariantTable.$inferSelect)[];
 }
 
-export function VariantSelector({
-  variants,
+const VariantSelector = ({
   selectedVariantSlug,
-}: VariantSelectorProps) {
+  variants,
+}: VariantSelectorProps) => {
   return (
     <div className="flex items-center gap-4">
       {variants.map((variant) => (
@@ -20,7 +20,7 @@ export function VariantSelector({
           key={variant.id}
           className={
             selectedVariantSlug === variant.slug
-              ? "border-primary rounded-xl border-2 border-solid"
+              ? "border-primary rounded-xl border-2"
               : ""
           }
         >
@@ -35,4 +35,6 @@ export function VariantSelector({
       ))}
     </div>
   );
-}
+};
+
+export default VariantSelector;
