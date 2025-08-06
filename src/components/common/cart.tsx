@@ -25,8 +25,6 @@ export function Cart() {
     queryFn: getCart,
   });
 
-  console.log(cart);
-
   return (
     <Sheet>
       <SheetTrigger asChild>
