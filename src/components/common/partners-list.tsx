@@ -21,6 +21,21 @@ const PARTNERS = [
     name: "New Balance",
     imageUrl: "/partners/new-balance.svg",
   },
+  {
+    id: 5,
+    name: "Converse",
+    imageUrl: "/partners/converse.svg",
+  },
+  {
+    id: 6,
+    name: "Polo",
+    imageUrl: "/partners/polo.svg",
+  },
+  {
+    id: 7,
+    name: "Zara",
+    imageUrl: "/partners/zara.svg",
+  },
 ];
 
 export function PartnersList() {
