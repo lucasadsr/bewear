@@ -46,7 +46,7 @@ export function Cart() {
 
         <div className="flex h-full flex-col px-5 pb-5">
           <div className="flex h-full max-h-full flex-col overflow-hidden">
-            {!isCartPending ? (
+            {isCartPending ? (
               <ScrollArea className="h-full">
                 <CartSkeleton />
               </ScrollArea>
