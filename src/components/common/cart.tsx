@@ -1,6 +1,7 @@
 "use client";
 
 import { ShoppingBagIcon, ShoppingBasketIcon } from "lucide-react";
+import Link from "next/link";
 
 import { formatCentsToBRL } from "@/helpers/money";
 import { useCart } from "@/hooks/queries/use-cart";
@@ -24,7 +25,16 @@ export function Cart() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant={"outline"} size={"icon"} className="cursor-pointer">
+        <Button
+          variant={"outline"}
+          size={"icon"}
+          className="relative cursor-pointer"
+        >
+          {cart?.items.length && cart?.items.length > 0 && (
+            <span className="bg-primary absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full text-xs font-bold text-white">
+              {cart.items.length}
+            </span>
+          )}
           <ShoppingBasketIcon />
         </Button>
       </SheetTrigger>
@@ -55,7 +65,7 @@ export function Cart() {
                       productName={item.productVariant.product.name}
                       productVariantName={item.productVariant.name}
                       productVariantImageUrl={item.productVariant.imageUrl}
-                      productVariantTotalPriceInCents={
+                      productVariantPriceInCents={
                         item.productVariant.priceInCents * item.quantity
                       }
                       quantity={item.quantity}
@@ -91,8 +101,8 @@ export function Cart() {
                 </p>
               </div>
 
-              <Button className="mt-5 cursor-pointer rounded-full">
-                Finalizar compra
+              <Button className="mt-5 cursor-pointer rounded-full" asChild>
+                <Link href={"/cart/identification"}>Finalizar compra</Link>
               </Button>
             </div>
           )}
