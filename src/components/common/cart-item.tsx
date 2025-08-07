@@ -1,6 +1,9 @@
-import { MinusIcon, PlusIcon, TrashIcon } from "lucide-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Loader2, MinusIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
+import { toast } from "sonner";
 
+import { removeProductFromCart } from "@/actions/remove-cart-product";
 import { formatCentsToBRL } from "@/helpers/money";
 
 import { Button } from "../ui/button";
@@ -22,6 +25,24 @@ export function CartItem({
   productVariantTotalPriceInCents,
   quantity,
 }: CartItemProps) {
+  const queryClient = useQueryClient();
+
+  const removeProductFromCartMutation = useMutation({
+    mutationKey: ["remove-cart-product"],
+    mutationFn: () => removeProductFromCart({ cartItemId: id }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
+      toast.success("Produto removido do carrinho");
+    },
+    onError: () => {
+      toast.error("Erro ao remover produto do carrinho");
+    },
+  });
+
+  function handleDeleteClick() {
+    removeProductFromCartMutation.mutate();
+  }
+
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-4">
@@ -37,7 +58,7 @@ export function CartItem({
           <p className="text-muted-foreground text-xs font-medium">
             {productVariantName}
           </p>
-          <div className="flex w-[100px] items-center justify-between rounded-lg border p-1">
+          <div className="flex w-[70px] items-center justify-between rounded-lg border p-1">
             <Button className="h-4 w-4" variant="ghost" onClick={() => {}}>
               <MinusIcon />
             </Button>
@@ -49,8 +70,18 @@ export function CartItem({
         </div>
       </div>
       <div className="flex flex-col items-end justify-center gap-2">
-        <Button variant="outline" size="icon">
-          <TrashIcon />
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={handleDeleteClick}
+          disabled={removeProductFromCartMutation.isPending}
+          className="cursor-pointer"
+        >
+          {removeProductFromCartMutation.isPending ? (
+            <Loader2 className="animate-spin" />
+          ) : (
+            <TrashIcon />
+          )}
         </Button>
         <p className="text-sm font-bold">
           {formatCentsToBRL(productVariantTotalPriceInCents)}
