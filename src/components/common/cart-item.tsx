@@ -1,5 +1,6 @@
-import { Loader2, MinusIcon, PlusIcon, TrashIcon } from "lucide-react";
+import { MinusIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
+import { toast } from "sonner";
 
 import { formatCentsToBRL } from "@/helpers/money";
 import { useDecreaseProductQuantityMutation } from "@/hooks/mutations/use-decrease-product-quantity-mutation";
@@ -14,7 +15,7 @@ interface CartItemProps {
   productVariantId: string;
   productVariantName: string;
   productVariantImageUrl: string;
-  productVariantTotalPriceInCents: number;
+  productVariantPriceInCents: number;
   quantity: number;
 }
 
@@ -24,25 +25,38 @@ export function CartItem({
   productVariantId,
   productVariantName,
   productVariantImageUrl,
-  productVariantTotalPriceInCents,
+  productVariantPriceInCents,
   quantity,
 }: CartItemProps) {
   const removeProductFromCartMutation = useRemoveProductFromCart(id);
-  const decreaseCartItemQuantityMutation =
+  const decreaseCartProductQuantityMutation =
     useDecreaseProductQuantityMutation(id);
-  const increaseProductQuantityMutation =
+  const increaseCartProductQuantityMutation =
     useIncreaseProductQuantityMutation(productVariantId);
-
-  function handleDeleteClick() {
-    removeProductFromCartMutation.mutate();
-  }
-  function handleDecreaseQuantity() {
-    decreaseCartItemQuantityMutation.mutate();
-  }
-  function handleIncreaseQuantity() {
-    increaseProductQuantityMutation.mutate();
-  }
-
+  const handleDeleteClick = () => {
+    removeProductFromCartMutation.mutate(undefined, {
+      onSuccess: () => {
+        toast.success("Produto removido do carrinho.");
+      },
+      onError: () => {
+        toast.error("Erro ao remover produto do carrinho.");
+      },
+    });
+  };
+  const handleDecreaseQuantityClick = () => {
+    decreaseCartProductQuantityMutation.mutate(undefined, {
+      onSuccess: () => {
+        toast.success("Quantidade do produto diminuida.");
+      },
+    });
+  };
+  const handleIncreaseQuantityClick = () => {
+    increaseCartProductQuantityMutation.mutate(undefined, {
+      onSuccess: () => {
+        toast.success("Quantidade do produto aumentada.");
+      },
+    });
+  };
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-4">
@@ -58,19 +72,19 @@ export function CartItem({
           <p className="text-muted-foreground text-xs font-medium">
             {productVariantName}
           </p>
-          <div className="flex w-[70px] items-center justify-between rounded-lg border p-1">
+          <div className="flex w-[100px] items-center justify-between rounded-lg border p-1">
             <Button
-              className="h-4 w-4 cursor-pointer"
+              className="h-4 w-4"
               variant="ghost"
-              onClick={handleDecreaseQuantity}
+              onClick={handleDecreaseQuantityClick}
             >
               <MinusIcon />
             </Button>
             <p className="text-xs font-medium">{quantity}</p>
             <Button
-              className="h-4 w-4 cursor-pointer"
+              className="h-4 w-4"
               variant="ghost"
-              onClick={handleIncreaseQuantity}
+              onClick={handleIncreaseQuantityClick}
             >
               <PlusIcon />
             </Button>
@@ -78,21 +92,11 @@ export function CartItem({
         </div>
       </div>
       <div className="flex flex-col items-end justify-center gap-2">
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={handleDeleteClick}
-          disabled={removeProductFromCartMutation.isPending}
-          className="cursor-pointer"
-        >
-          {removeProductFromCartMutation.isPending ? (
-            <Loader2 className="animate-spin" />
-          ) : (
-            <TrashIcon />
-          )}
+        <Button variant="outline" size="icon" onClick={handleDeleteClick}>
+          <TrashIcon />
         </Button>
         <p className="text-sm font-bold">
-          {formatCentsToBRL(productVariantTotalPriceInCents)}
+          {formatCentsToBRL(productVariantPriceInCents)}
         </p>
       </div>
     </div>
