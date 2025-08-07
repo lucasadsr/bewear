@@ -39,7 +39,7 @@ export default async function Home() {
               height={0}
               sizes="100vw"
               quality={100}
-              className="h-auto w-full rounded-lg lg:h-[80vh] lg:rounded-xl"
+              className="h-auto w-full rounded-lg lg:aspect-auto lg:rounded-xl"
             />
           </div>
 
