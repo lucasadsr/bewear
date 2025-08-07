@@ -112,12 +112,32 @@
   --sidebar-ring: oklch(0.541 0.281 293.009);
 }
 
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Melhorias para telas grandes */
+  @media (min-width: 1024px) {
+    /* Melhor scrollbar para desktop */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      @apply bg-muted;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      @apply bg-muted-foreground/30 rounded-md;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      @apply bg-muted-foreground/50;
+    }
   }
 }

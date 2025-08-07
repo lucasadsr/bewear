@@ -20,15 +20,25 @@ import { Cart } from "./cart";
 export const Header = () => {
   const { data: session } = authClient.useSession();
   return (
-    <header className="flex items-center justify-between p-5">
+    <header className="flex items-center justify-between p-5 lg:px-8 lg:py-6">
       <Link href="/">
-        <Image src="/logo.svg" alt="BEWEAR" width={100} height={26.14} />
+        <Image
+          src="/logo.svg"
+          alt="BEWEAR"
+          width={100}
+          height={26.14}
+          className="lg:w-[120px]"
+        />
       </Link>
 
       <div className="flex items-center gap-3">
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="cursor-pointer">
+            <Button
+              variant="outline"
+              size="icon"
+              className="cursor-pointer lg:hidden"
+            >
               <MenuIcon />
             </Button>
           </SheetTrigger>
@@ -80,6 +90,46 @@ export const Header = () => {
             </div>
           </SheetContent>
         </Sheet>
+
+        <nav className="hidden lg:flex lg:items-center lg:gap-6">
+          {session?.user ? (
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
+                <Avatar>
+                  <AvatarImage
+                    src={session?.user?.image as string | undefined}
+                  />
+                  <AvatarFallback>
+                    {session?.user?.name?.split(" ")?.[0]?.[0]}
+                    {session?.user?.name?.split(" ")?.[1]?.[0]}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <h3 className="text-sm font-semibold">
+                    {session?.user?.name}
+                  </h3>
+                  <span className="text-muted-foreground block text-xs">
+                    {session?.user?.email}
+                  </span>
+                </div>
+              </div>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => authClient.signOut()}
+              >
+                <LogOutIcon />
+              </Button>
+            </div>
+          ) : (
+            <Button asChild variant="outline">
+              <Link href="/authentication">
+                <LogInIcon className="mr-2 h-4 w-4" />
+                Fazer Login
+              </Link>
+            </Button>
+          )}
+        </nav>
 
         <Cart />
       </div>

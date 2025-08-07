@@ -41,8 +41,13 @@ const PARTNERS = [
 export function PartnersList() {
   return (
     <div className="space-y-6">
-      <h3 className="px-5 text-lg font-semibold">Marcas parceiras</h3>
-      <div className="flex w-full gap-4 overflow-x-auto px-5 [&::-webkit-scrollbar]:hidden">
+      <h3 className="px-5 text-lg font-semibold lg:px-0">Marcas parceiras</h3>
+      <div className="flex w-full gap-4 overflow-x-auto px-5 lg:hidden [&::-webkit-scrollbar]:hidden">
+        {PARTNERS.map((partner) => (
+          <PartnerItem key={partner.id} partner={partner} />
+        ))}
+      </div>
+      <div className="hidden lg:grid lg:grid-cols-2 lg:gap-3 lg:px-0 xl:grid-cols-3">
         {PARTNERS.map((partner) => (
           <PartnerItem key={partner.id} partner={partner} />
         ))}

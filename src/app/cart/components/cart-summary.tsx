@@ -24,7 +24,7 @@ export function CartSummary({
   products,
 }: CartSummaryProps) {
   return (
-    <Card>
+    <Card className="w-full max-w-full">
       <CardHeader>
         <CardTitle>Resumo</CardTitle>
       </CardHeader>

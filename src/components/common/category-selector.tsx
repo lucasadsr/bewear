@@ -10,13 +10,13 @@ interface CategorySelectorProps {
 
 export function CategorySelector({ categories }: CategorySelectorProps) {
   return (
-    <div className="rounded-3xl bg-[#F4EFFF] p-6">
-      <div className="grid grid-cols-2 gap-3">
+    <div className="rounded-3xl bg-[#F4EFFF] p-6 lg:flex lg:h-full lg:flex-col lg:justify-center">
+      <div className="grid grid-cols-2 gap-3 lg:gap-4">
         {categories.map((category) => (
           <Button
             variant="ghost"
             key={category.id}
-            className="cursor-pointer rounded-full bg-white"
+            className="cursor-pointer rounded-full bg-white hover:bg-white/90 lg:py-3"
           >
             <Link href={`/category/${category.slug}`}>{category.name}</Link>
           </Button>

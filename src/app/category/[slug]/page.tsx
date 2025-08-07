@@ -30,9 +30,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   return (
     <>
       <Header />
-      <div className="space-y-6 px-5">
-        <h2 className="text-xl font-semibold">{category.name}</h2>
-        <div className="grid grid-cols-2 gap-4">
+      <div className="space-y-6 px-5 lg:px-8 lg:py-6">
+        <h2 className="text-xl font-semibold lg:text-2xl">{category.name}</h2>
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6 xl:grid-cols-5">
           {products.map((product) => (
             <ProductItem
               key={product.id}

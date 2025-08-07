@@ -30,36 +30,42 @@ export default async function Home() {
       <Header />
 
       <div className="space-y-6">
-        <div className="px-5">
-          <Image
-            src="/banner-01.png"
-            alt="Leve uma vida com estilo"
-            width={0}
-            height={0}
-            sizes="100vw"
-            quality={100}
-            className="h-auto w-full"
-          />
-        </div>
+        <div className="space-y-6 lg:grid lg:grid-cols-5 lg:gap-8 lg:space-y-0 lg:px-8">
+          <div className="px-5 lg:col-span-2 lg:px-0">
+            <Image
+              src="/banner-01.png"
+              alt="Leve uma vida com estilo"
+              width={0}
+              height={0}
+              sizes="100vw"
+              quality={100}
+              className="h-auto w-full rounded-lg lg:h-[80vh] lg:rounded-xl"
+            />
+          </div>
 
-        <PartnersList />
+          <div className="lg:col-span-3">
+            <PartnersList />
+          </div>
+        </div>
 
         <ProductList title="Mais vendidos" products={products} />
 
-        <div className="px-5">
-          <CategorySelector categories={categories} />
-        </div>
+        <div className="space-y-6 lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0 lg:px-8">
+          <div className="px-5 lg:px-0">
+            <CategorySelector categories={categories} />
+          </div>
 
-        <div className="px-5">
-          <Image
-            src="/banner-02.png"
-            alt="Seja auténtico"
-            width={0}
-            height={0}
-            sizes="100vw"
-            quality={100}
-            className="h-auto w-full"
-          />
+          <div className="px-5 lg:px-0">
+            <Image
+              src="/banner-02.png"
+              alt="Seja auténtico"
+              width={0}
+              height={0}
+              sizes="100vw"
+              quality={100}
+              className="h-auto w-full rounded-lg lg:rounded-xl"
+            />
+          </div>
         </div>
 
         <ProductList title="Novidades" products={newlyCreatedProducts} />

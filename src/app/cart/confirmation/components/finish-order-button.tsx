@@ -50,7 +50,7 @@ const FinishOrderButton = () => {
             na seção de “Meus Pedidos”.
           </DialogDescription>
 
-          <DialogFooter>
+          <DialogFooter className="flex gap-4 lg:w-full lg:flex-col lg:justify-center">
             <Button className="rounded-full" size="lg">
               Ver meus pedidos
             </Button>
