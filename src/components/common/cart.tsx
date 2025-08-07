@@ -1,10 +1,9 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { ShoppingBagIcon, ShoppingBasketIcon } from "lucide-react";
 
-import { getCart } from "@/actions/get-card";
 import { formatCentsToBRL } from "@/helpers/money";
+import { useCart } from "@/hooks/queries/use-cart";
 
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
@@ -20,10 +19,7 @@ import { CartItem } from "./cart-item";
 import { CartSkeleton } from "./cart-skeleton";
 
 export function Cart() {
-  const { data: cart, isPending: isCartPending } = useQuery({
-    queryKey: ["cart"],
-    queryFn: getCart,
-  });
+  const { data: cart, isPending: isCartPending } = useCart();
 
   return (
     <Sheet>
