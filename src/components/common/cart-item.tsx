@@ -3,6 +3,7 @@ import { Loader2, MinusIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
 import { toast } from "sonner";
 
+import { addProductToCart } from "@/actions/add-cart-product";
 import { decreaseCartItemQuantity } from "@/actions/decrease-cart-product-quantity";
 import { removeProductFromCart } from "@/actions/remove-cart-product";
 import { formatCentsToBRL } from "@/helpers/money";
@@ -12,6 +13,7 @@ import { Button } from "../ui/button";
 interface CartItemProps {
   id: string;
   productName: string;
+  productVariantId: string;
   productVariantName: string;
   productVariantImageUrl: string;
   productVariantTotalPriceInCents: number;
@@ -21,6 +23,7 @@ interface CartItemProps {
 export function CartItem({
   id,
   productName,
+  productVariantId,
   productVariantName,
   productVariantImageUrl,
   productVariantTotalPriceInCents,
@@ -52,12 +55,27 @@ export function CartItem({
     },
   });
 
+  const increaseProductQuantityMutation = useMutation({
+    mutationKey: ["increase-cart-product-quantity"],
+    mutationFn: () => addProductToCart({ productVariantId, quantity: 1 }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
+      toast.success("Quantidade do produto aumentada");
+    },
+    onError: () => {
+      toast.error("Erro ao aumentar quantidade do produto");
+    },
+  });
+
   function handleDeleteClick() {
     removeProductFromCartMutation.mutate();
   }
 
   function handleDecreaseQuantity() {
     decreaseProductQuantityMutation.mutate();
+  }
+  function handleIncreaseQuantity() {
+    increaseProductQuantityMutation.mutate();
   }
 
   return (
@@ -87,7 +105,7 @@ export function CartItem({
             <Button
               className="h-4 w-4 cursor-pointer"
               variant="ghost"
-              onClick={() => {}}
+              onClick={handleIncreaseQuantity}
             >
               <PlusIcon />
             </Button>
