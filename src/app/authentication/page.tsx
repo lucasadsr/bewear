@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SignInForm } from "./components/sign-in-form";
 import { SignUpForm } from "./components/sign-up-form";
 
-export default function Authentication() {
+export default async function Authentication() {
   return (
     <>
       <Header />

@@ -18,6 +18,7 @@ const IdentificationPage = async () => {
   if (!session?.user.id) {
     redirect("/");
   }
+  
   const cart = await db.query.cartTable.findFirst({
     where: (cart, { eq }) => eq(cart.userId, session.user.id),
     with: {
