@@ -131,7 +131,7 @@ export const Header = () => {
           )}
         </nav>
 
-        <Cart />
+        {session?.user && <Cart />}
       </div>
     </header>
   );
