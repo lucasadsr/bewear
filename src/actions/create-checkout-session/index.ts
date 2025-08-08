@@ -13,18 +13,18 @@ import {
   createCheckoutSessionSchema,
 } from "./schema";
 
-export async function createCheckoutSession(data: CreateCheckoutSessionSchema) {
+export const createCheckoutSession = async (
+  data: CreateCheckoutSessionSchema,
+) => {
   if (!process.env.STRIPE_SECRET_KEY) {
-    throw new Error("Stripe secret key is not defined");
+    throw new Error("Stripe secret key is not set");
   }
-
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  if (!session) {
+  if (!session?.user) {
     throw new Error("Unauthorized");
   }
-
   const { orderId } = createCheckoutSessionSchema.parse(data);
   const order = await db.query.orderTable.findFirst({
     where: eq(orderTable.id, orderId),
@@ -32,18 +32,15 @@ export async function createCheckoutSession(data: CreateCheckoutSessionSchema) {
   if (!order) {
     throw new Error("Order not found");
   }
-
+  if (order.userId !== session.user.id) {
+    throw new Error("Unauthorized");
+  }
   const orderItems = await db.query.orderItemTable.findMany({
-    where: eq(orderItemTable.orderId, order.id),
+    where: eq(orderItemTable.orderId, orderId),
     with: {
-      productVariant: {
-        with: {
-          product: true,
-        },
-      },
+      productVariant: { with: { product: true } },
     },
   });
-
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
   const checkoutSession = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -53,21 +50,21 @@ export async function createCheckoutSession(data: CreateCheckoutSessionSchema) {
     metadata: {
       orderId,
     },
-    line_items: orderItems.map((item) => {
+    line_items: orderItems.map((orderItem) => {
       return {
         price_data: {
-          currency: "BRL",
+          currency: "brl",
           product_data: {
-            name: `${item.productVariant.product.name} - ${item.productVariant.name}`,
-            description: item.productVariant.product.description,
-            images: [item.productVariant.imageUrl],
+            name: `${orderItem.productVariant.product.name} - ${orderItem.productVariant.name}`,
+            description: orderItem.productVariant.product.description,
+            images: [orderItem.productVariant.imageUrl],
           },
-          unit_amount: item.productVariant.priceInCents,
+          // Em centavos
+          unit_amount: orderItem.priceInCents,
         },
-        quantity: item.quantity,
+        quantity: orderItem.quantity,
       };
     }),
   });
-
   return checkoutSession;
-}
+};
