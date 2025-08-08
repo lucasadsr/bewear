@@ -23,8 +23,8 @@ const ProductActions = ({ productVariantId }: ProductActionsProps) => {
   };
 
   return (
-    <>
-      <div className="px-5 lg:px-0">
+    <div className="my-4">
+      <div className="mb-4 px-5 lg:px-0">
         <div className="space-y-4">
           <h3 className="font-medium">Quantidade</h3>
           <div className="flex w-[100px] items-center justify-between rounded-lg border">
@@ -57,7 +57,7 @@ const ProductActions = ({ productVariantId }: ProductActionsProps) => {
           Comprar agora
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 
