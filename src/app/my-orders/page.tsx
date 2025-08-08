@@ -20,6 +20,7 @@ export default async function MyOrdersPage() {
   }
   const orders = await db.query.orderTable.findMany({
     where: eq(orderTable.userId, session?.user.id),
+    orderBy: (order, { desc }) => [desc(order.createdAt)],
     with: {
       items: {
         with: {
