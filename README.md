@@ -4,7 +4,7 @@ Uma plataforma moderna de e-commerce especializada em calçados e moda urbana, d
 
 ## 📋 Sobre o Projeto
 
-O **BEWARE** é uma aplicação completa de e-commerce que oferece uma experiência de compra fluida e moderna. A plataforma permite aos usuários navegar por produtos, adicionar itens ao carrinho, realizar pagamentos seguros e gerenciar seus pedidos.
+O **BEWEAR** é uma aplicação completa de e-commerce que oferece uma experiência de compra fluida e moderna. A plataforma permite aos usuários navegar por produtos, adicionar itens ao carrinho, realizar pagamentos seguros e gerenciar seus pedidos.
 
 ### ✨ Principais Funcionalidades
 
@@ -86,8 +86,8 @@ src/
 ### 1. Clone o Repositório
 
 ```bash
-git clone https://github.com/lucasadsr/beware.git
-cd beware
+git clone https://github.com/lucasadsr/bewear.git
+cd bewear
 ```
 
 ### 2. Instale as Dependências
@@ -104,7 +104,7 @@ Crie um arquivo `.env.local` na raiz do projeto com as seguintes variáveis:
 
 ```env
 # Database
-DATABASE_URL="postgresql://username:password@localhost:5432/beware"
+DATABASE_URL="postgresql://username:password@localhost:5432/bewear"
 
 # Auth
 BETTER_AUTH_SECRET="your-secret-key"
