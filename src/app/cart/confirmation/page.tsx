@@ -1,7 +1,6 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { Footer } from "@/components/common/footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { db } from "@/db";
 import { auth } from "@/lib/auth";
@@ -79,9 +78,6 @@ const ConfirmationPage = async () => {
             />
           </div>
         </div>
-      </div>
-      <div className="mt-12">
-        <Footer />
       </div>
     </div>
   );

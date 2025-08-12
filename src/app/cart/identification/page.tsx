@@ -2,7 +2,6 @@ import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { Footer } from "@/components/common/footer";
 import { db } from "@/db";
 import { shippingAddressTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
@@ -68,9 +67,6 @@ const IdentificationPage = async () => {
             />
           </div>
         </div>
-      </div>
-      <div className="mt-12">
-        <Footer />
       </div>
     </div>
   );

@@ -2,7 +2,6 @@ import { eq } from "drizzle-orm";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import { Footer } from "@/components/common/footer";
 import { ProductList } from "@/components/common/products-list";
 import { db } from "@/db";
 import { productTable } from "@/db/schema";
@@ -128,8 +127,6 @@ export default async function ProductVariantPage({
         </div>
 
         <ProductList title="Talvez você goste" products={likelyProducts} />
-
-        <Footer />
       </div>
     </>
   );
