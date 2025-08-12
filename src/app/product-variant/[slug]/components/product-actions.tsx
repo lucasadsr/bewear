@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 import AddToCartButton from "./add-to-cart-button";
+import BuyNowButton from "./buy-now-button";
 
 interface ProductActionsProps {
   productVariantId: string;
@@ -53,9 +54,7 @@ const ProductActions = ({ productVariantId }: ProductActionsProps) => {
           productVariantId={productVariantId}
           quantity={quantity}
         />
-        <Button className="cursor-pointer rounded-full" size="lg">
-          Comprar agora
-        </Button>
+        <BuyNowButton productVariantId={productVariantId} quantity={quantity} />
       </div>
     </div>
   );
