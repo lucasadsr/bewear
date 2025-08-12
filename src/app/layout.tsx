@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import { Header } from "@/components/common/header";
 import { Toaster } from "@/components/ui/sonner";
 import ReactQueryProvider from "@/providers/react-query";
 
@@ -33,7 +34,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReactQueryProvider>
-          <div className="mx-auto max-w-7xl">{children}</div>
+          <Header />
+          <div className="mx-auto mt-10 max-w-7xl">{children}</div>
         </ReactQueryProvider>
         <Toaster richColors />
         <Analytics />

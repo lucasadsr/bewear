@@ -3,7 +3,6 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { Footer } from "@/components/common/footer";
-import { Header } from "@/components/common/header";
 import { ProductList } from "@/components/common/products-list";
 import { db } from "@/db";
 import { productTable } from "@/db/schema";
@@ -47,7 +46,6 @@ export default async function ProductVariantPage({
 
   return (
     <>
-      <Header />
       <div className="flex flex-col space-y-6">
         <div className="lg:hidden">
           <Image

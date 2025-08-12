@@ -3,7 +3,6 @@ import Image from "next/image";
 
 import { CategorySelector } from "@/components/common/category-selector";
 import { Footer } from "@/components/common/footer";
-import { Header } from "@/components/common/header";
 import { PartnersList } from "@/components/common/partners-list";
 import { ProductList } from "@/components/common/products-list";
 import { db } from "@/db";
@@ -27,8 +26,6 @@ export default async function Home() {
 
   return (
     <>
-      <Header />
-
       <div className="space-y-6">
         <div className="space-y-6 lg:grid lg:grid-cols-5 lg:gap-8 lg:space-y-0 lg:px-8">
           <div className="px-5 lg:col-span-2 lg:px-0">

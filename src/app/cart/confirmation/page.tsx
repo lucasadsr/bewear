@@ -2,7 +2,6 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { Footer } from "@/components/common/footer";
-import { Header } from "@/components/common/header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { db } from "@/db";
 import { auth } from "@/lib/auth";
@@ -46,7 +45,6 @@ const ConfirmationPage = async () => {
   }
   return (
     <div>
-      <Header />
       <div className="space-y-4 px-5 lg:px-8 lg:py-6">
         <div className="mx-auto space-y-4 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0">
           <div className="lg:col-span-2">

@@ -1,4 +1,3 @@
-import { Header } from "@/components/common/header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { SignInForm } from "./components/sign-in-form";
@@ -7,7 +6,6 @@ import { SignUpForm } from "./components/sign-up-form";
 export default async function Authentication() {
   return (
     <>
-      <Header />
       <div className="flex w-full flex-col gap-6 p-5 lg:px-8 lg:py-12">
         <div className="mx-auto w-full max-w-md">
           <Tabs defaultValue="sign-in">

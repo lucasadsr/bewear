@@ -3,7 +3,6 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { Footer } from "@/components/common/footer";
-import { Header } from "@/components/common/header";
 import { db } from "@/db";
 import { shippingAddressTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
@@ -18,7 +17,7 @@ const IdentificationPage = async () => {
   if (!session?.user.id) {
     redirect("/");
   }
-  
+
   const cart = await db.query.cartTable.findFirst({
     where: (cart, { eq }) => eq(cart.userId, session.user.id),
     with: {
@@ -46,7 +45,6 @@ const IdentificationPage = async () => {
   );
   return (
     <div>
-      <Header />
       <div className="space-y-4 px-5 lg:px-8 lg:py-6">
         <div className="mx-auto space-y-4 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0">
           <div className="lg:col-span-2">
