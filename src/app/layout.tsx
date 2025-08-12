@@ -1,5 +1,6 @@
 import "./globals.css";
 
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
@@ -35,6 +36,7 @@ export default function RootLayout({
           <div className="mx-auto max-w-7xl">{children}</div>
         </ReactQueryProvider>
         <Toaster richColors />
+        <Analytics />
       </body>
     </html>
   );
