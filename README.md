@@ -14,7 +14,6 @@ O **BEWEAR** é uma aplicação completa de e-commerce que oferece uma experiên
 - 📦 **Gestão de Pedidos** - Acompanhamento completo do histórico de compras
 - 🏠 **Endereços de Entrega** - Cadastro e gestão de múltiplos endereços
 - 📱 **Design Responsivo** - Interface otimizada para desktop e dispositivos móveis
-- 🎨 **Tema Escuro/Claro** - Alternância entre temas para melhor experiência do usuário
 
 ## 🛠️ Tecnologias Utilizadas
 
