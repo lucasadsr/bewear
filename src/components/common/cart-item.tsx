@@ -72,7 +72,7 @@ export function CartItem({
           <p className="text-muted-foreground text-xs font-medium">
             {productVariantName}
           </p>
-          <div className="flex w-[100px] items-center justify-between rounded-lg border p-1">
+          <div className="flex w-[80px] items-center justify-between rounded-lg border p-1">
             <Button
               className="h-4 w-4"
               variant="ghost"

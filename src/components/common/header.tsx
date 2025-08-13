@@ -28,6 +28,7 @@ import { Cart } from "./cart";
 export const Header = () => {
   const { data: session } = authClient.useSession();
   const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,7 +57,7 @@ export const Header = () => {
         </Link>
 
         <div className="flex items-center gap-3">
-          <Sheet>
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button
                 variant="outline"
@@ -76,6 +77,7 @@ export const Header = () => {
                   <Button
                     variant="ghost"
                     className="w-full justify-start"
+                    onClick={() => setIsOpen(false)}
                     asChild
                   >
                     <Link href="/">
@@ -88,6 +90,7 @@ export const Header = () => {
                     <Button
                       variant="ghost"
                       className="w-full justify-start"
+                      onClick={() => setIsOpen(false)}
                       asChild
                     >
                       <Link href="/my-orders">
@@ -135,7 +138,12 @@ export const Header = () => {
                   ) : (
                     <div className="flex items-center justify-between">
                       <h2 className="font-semibold">Olá. Faça seu login!</h2>
-                      <Button size="icon" asChild variant="outline">
+                      <Button
+                        size="icon"
+                        asChild
+                        variant="outline"
+                        onClick={() => setIsOpen(false)}
+                      >
                         <Link href="/authentication">
                           <LogInIcon />
                         </Link>
