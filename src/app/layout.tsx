@@ -42,8 +42,8 @@ export default function RootLayout({
           <Footer />
         </ReactQueryProvider>
         <Toaster richColors />
-        <Analytics />
       </body>
+      <Analytics />
     </html>
   );
 }
