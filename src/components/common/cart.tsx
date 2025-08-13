@@ -2,6 +2,7 @@
 
 import { ShoppingBagIcon, ShoppingBasketIcon } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 import { formatCentsToBRL } from "@/helpers/money";
 import { useCart } from "@/hooks/queries/use-cart";
@@ -21,9 +22,10 @@ import { CartSkeleton } from "./cart-skeleton";
 
 export function Cart() {
   const { data: cart, isPending: isCartPending } = useCart();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <Button
           variant={"outline"}
@@ -101,7 +103,11 @@ export function Cart() {
                 </p>
               </div>
 
-              <Button className="mt-5 cursor-pointer rounded-full" asChild>
+              <Button
+                className="mt-5 cursor-pointer rounded-full"
+                asChild
+                onClick={() => setIsOpen(false)}
+              >
                 <Link href={"/cart/identification"}>Finalizar compra</Link>
               </Button>
             </div>
