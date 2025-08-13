@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { addProductToCart } from "@/actions/add-cart-product";
 import { Button } from "@/components/ui/button";
 import { getUseCartQueryKey } from "@/hooks/queries/use-cart";
+import { authClient } from "@/lib/auth-client";
 
 interface BuyNowButtonProps {
   productVariantId: string;
@@ -16,8 +17,9 @@ interface BuyNowButtonProps {
 const BuyNowButton = ({ productVariantId, quantity }: BuyNowButtonProps) => {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { data: session } = authClient.useSession();
   const { mutate, isPending } = useMutation({
-    mutationKey: ["addProductToCart", productVariantId, quantity],
+    mutationKey: ["buyNow", productVariantId, quantity],
     mutationFn: () =>
       addProductToCart({
         productVariantId,
@@ -28,12 +30,20 @@ const BuyNowButton = ({ productVariantId, quantity }: BuyNowButtonProps) => {
       router.push("/cart/identification");
     },
   });
+
+  function handleBuyNow() {
+    if (!session?.user) {
+      return router.push("/authentication");
+    }
+    mutate();
+  }
+
   return (
     <Button
       className="cursor-pointer rounded-full"
       size="lg"
       disabled={isPending}
-      onClick={() => mutate()}
+      onClick={handleBuyNow}
     >
       {isPending && <Loader2 className="animate-spin" />}
       Comprar agora
